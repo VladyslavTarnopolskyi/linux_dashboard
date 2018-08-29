@@ -1,5 +1,5 @@
 $(function() {
-    var socket = io.connect(server);
+    var socket = io.connect('http://localhost:8080/');
 
     socket.on('onConnection', function(static) {
         console.log(static);
