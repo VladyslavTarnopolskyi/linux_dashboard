@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Linux dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-green-light ">
+            <a class="navbar-brand" href="#">Linux Dashboard</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#system-info">System Info</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#cpu">CPU</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#ram">RAM</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#disk-usage">Disk</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <section class="gen-info" id="system-info">
+        <div class="container-fluid header-block">
+            <div >System information</div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="info-block">
+                        <div class="text-center">Name info</div>
+                        <div class="pc-name">PC name: <span id="host" class="text-primary"></span></div>
+                        <div class="user-name">User name: <span id="user" class="text-primary"></span></div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+
+                    <div class="info-block">
+                        <div class="text-center">OS info</div>
+                        <div class="os">OS: <span id="sys-os" class="text-primary"></span></div>
+                        <div class="os">Platform: <span id="platform" class="text-primary"></span></div>
+                        <div class="os">Architecture: <span id="arch" class="text-primary"></span></div>
+                        <div class="server-time">Current Time: <span id="currTime" class="text-primary"></span></div>
+                        <div class="uptime">Uptime: <span id="up-time" class="text-primary"></span></div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="info-block">
+                        <div class="text-center">CPU info</div>
+                        <div class="os">
+                            <div class="brand">Brand: <span id="brand" class="text-primary"></span></div>
+                            <div class="manufacturer">Manufacturer: <span id="manufacturer" class="text-primary"></span></div>
+
+                            <div class="speed">Speed: <span id="speed" class="text-primary"></span> <span class="text-primary">GHz</span></div>
+                            <div class="speed">Max speed: <span id="speedmax" class="text-primary"></span> <span class="text-primary">GHz</span></div>
+                            <div class="cores">Cores: <span id="cores" class="text-primary"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="info-block">
+                        <div class="text-center">Process info</div>
+                        <div class="os" id="proc">
+                            <div class="brand">All: <span id="all-proc" class="text-primary"></span></div>
+                            <div class="manufacturer">Blocked: <span id="blocked-proc" class="text-primary"></span></div>
+
+                            <div class="speed">Running: <span id="run-proc" class="text-primary"></span></div>
+                            <div class="speed">Sleeping: <span id="sleep-proc" class="text-primary"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="cpu-info" id="cpu">
+        <div class="container-fluid header-block">
+            <div >CPU information</div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 col-lg-4">
+                    <div class="info-block">
+                        <div class="average">
+                            <div>1 min avg: <span id="one" class="text-primary"></span></div>
+                            <div>5 min avg: <span id="five" class="text-primary"></span></div>
+                            <div>15 min avg: <span id="fteen" class="text-primary"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-8">
+                    <div class="info-block">
+                        <div id='cpu-load-chart'></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="ram">
+        <div class="container-fluid header-block">
+            <div >RAM information</div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-lg-4">
+                    <div class="info-block">
+                        <div class="ram d-flex justify-content-center text-center">
+                            <div>
+                                <div>Total Memory: </div>
+                                <div id="mem-total" class="text-primary"></div>
+                            </div>
+                            <div>
+                                <div>Free Memory: </div>
+                                <div id="mem-free" class="text-primary"></div>
+                            </div>
+                            <div>
+                                <div>Used Memory:</div>
+                                <div id="mem-used" class="text-primary"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-8">
+                    <div class="info-block">
+                        <div id="ram-chart">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="disk-usage">
+        <div class="container-fluid header-block">
+            <div >Disk Usage</div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-lg-4">
+                    <div class="info-block">
+                        <div class="d-flex">
+                            <div class="disk head-disk-info">Disk</div>
+                            <div class="size head-disk-info">Size</div>
+                            <div class="size head-disk-info">Free Size</div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="disk" id="disk" ></div>
+                            <div class="size text-primary" id="size" ></div>
+                            <div class="size text-primary" id="free-size" ></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-8">
+                    <div class="info-block">
+                        <div class="ram-chart">
+                            <div id="disk-space" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer bg-green-light">
+        <div class="d-flex justify-content-center">Linux Dashboard</div>
+    </footer>
+    <script type='text/javascript'
+            src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js'>
+    </script>
+    <script type='text/javascript'
+            src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'>
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.filesizejs.com/filesize.min.js">
+    </script>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script type='text/javascript'
+            src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js'>
+    </script>
+    <!--<script src="moment-precise-range/moment-precise-range.js"></script>-->
+    <script type='text/javascript'
+            src='http://localhost:8080/socket.io/socket.io.js'>
+    </script>
+    <script src="js/cpuCharts.js"></script>
+    <script src="js/ramChart.js"></script>
+    <script src="js/diskChart.js"></script>
+    <script type='text/javascript' src='index.js'></script>
+</body>
+</html>
